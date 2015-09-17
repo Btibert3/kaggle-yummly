@@ -20,3 +20,12 @@ We want to thank Yummly for providing this unique dataset. Kaggle is hosting thi
 
 My approach to this problem
 
+## Python codebase
+
+1.  Install Miniconda for python 3+
+
+
+
+2.
+  Create an R envivironment
+
