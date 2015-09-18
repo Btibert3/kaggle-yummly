@@ -41,4 +41,9 @@ LIMIT 1
 // Get around the data by using MERGE on the relationship creation
 
 
-//
+// Top 100 dishes that share ingredients with the example dish
+MATCH (d1:Dish {id:'24717'})<-[]-(ing:Ingredient)-[]->(d2:Dish {set:'train'})
+WITH d1, d2, count(ing) as overlap
+RETURN d1, d2, overlap
+ORDER BY overlap DESC
+LIMIT 100
