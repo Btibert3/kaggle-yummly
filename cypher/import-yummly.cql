@@ -18,7 +18,7 @@ LOAD CSV WITH HEADERS FROM "file:///Users/brock/github/kaggle-yummly/data/test-i
 WITH row 
 MERGE (ing:Ingredient {name:row.ingredient})
 MERGE (d:Dish {id:row.id})
-CREATE (ing) -[:PART_OF]-> (d);
+MERGE (ing) -[:PART_OF]-> (d);
 
 
 // train ingredients
@@ -27,4 +27,4 @@ LOAD CSV WITH HEADERS FROM "file:///Users/brock/github/kaggle-yummly/data/train-
 WITH row 
 MERGE (ing:Ingredient {name:row.ingredient})
 MERGE (d:Dish {id:row.id})
-CREATE (ing) -[:PART_OF]-> (d);
+MERGE (ing) -[:PART_OF]-> (d);
