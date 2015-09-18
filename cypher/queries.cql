@@ -11,6 +11,11 @@ ORDER BY total DESC
 LIMIT 25
 
 
+// ensure test sets exist
+MATCH (d:Dish {set:'test'})
+RETURN COUNT(d)
+
+
 // most popular ingredients in training set
 MATCH (i:Ingredient)-[r]->(d:Dish {set:'train'})
 RETURN i, count(r) as total

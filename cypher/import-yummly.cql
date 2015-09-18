@@ -2,7 +2,7 @@
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:///Users/brock/github/kaggle-yummly/data/test-dish.csv" AS row
 WITH row 
-MERGE (d:Dish {id:row.id});
+MERGE (d:Dish {id:row.id, set:row.set});
 
 
 // train dish
