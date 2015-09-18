@@ -47,3 +47,11 @@ WITH d1, d2, count(ing) as overlap
 RETURN d1, d2, overlap
 ORDER BY overlap DESC
 LIMIT 100
+
+
+// Top 25 test dishes similar , on volume overlap, to the example dish
+MATCH (d1:Dish {id:'24717'})<-[]-(ing:Ingredient)-[]->(d2:Dish {set:'test'})
+WITH d1, d2, count(ing) as overlap
+RETURN d1, d2, overlap
+ORDER BY overlap DESC
+LIMIT 25
