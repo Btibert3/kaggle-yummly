@@ -16,16 +16,20 @@ Acknowledgements
 
 We want to thank Yummly for providing this unique dataset. Kaggle is hosting this playground competition for fun and practice.
 
-## This repo
+## Populate Neo4j
 
-My approach to this problem
+1.  Make sure that `neo4j` is running  
+2.  Run the script `R/build-database.R` which reads the files and creates CSVs and wipes out any data that you have in `Neo4j` 
+3.  Run the two shell commands found in `cypher/create-db.sh`  
 
-## Python codebase
+This will add constraints, and the data to the database. 
 
-1.  Install Miniconda for python 3+
+#### Data Considerations  
 
+1.  It looks like there are some duplicate data.  For example, look at dish id `26165` in the training set.  Perhaps I parsed the files incorrectly, but it appears to be duplicate data.  Luckily we can use `MERGE` within `neo4j` to create unique nodes and edges.
 
+## Scripts
 
-2.
-  Create an R envivironment
+1. `cypher/queries.cql` contains `cypher` code to query the database.  
+2. `R/explore-yummly.R` does the same within `R`
 

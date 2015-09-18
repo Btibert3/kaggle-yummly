@@ -17,3 +17,6 @@ tbl_df(train_ing) %>%
 ## if use CREATE for the relationship, these are there
 ## remove them with the MERGE for the relationship
 subset(train_ing, id == '26165')
+
+
+
