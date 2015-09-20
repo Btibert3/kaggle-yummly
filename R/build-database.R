@@ -52,8 +52,13 @@ for (i in 1:length(test)) {
 ## cleanup
 rm(i)
 
+## on the training set, take 10% of rows and make them eval for the model tuning
+ROWS = sample(x = 1:nrow(train_dish), size = .1*nrow(train_dish), replace = F)
+train_dish$set[ROWS] = "eval"
+rm(ROWS)
 
-## save the data just in case
+
+## save out the data
 save(test_dish, test_ing, train_dish, train_ing, file="../data/temp-data.Rdata")
 write.table(test_dish, file="../data/test-dish.csv", sep=",", row.names=F)
 write.table(train_dish, file="../data/train-dish.csv", sep=",", row.names=F)
@@ -61,34 +66,26 @@ write.table(test_ing, file="../data/test-ing.csv", sep=",", row.names=F)
 write.table(train_ing, file="../data/train-ing.csv", sep=",", row.names=F)
 
 
+## save out a few rows of data from training to code models quickly
+IDS = sample(train_dish$id, size = 25, replace=F)
+dummy_dish = subset(train_dish, id %in% IDS)
+dummy_ing = subset(train_ing, id %in% dummy_dish$id)
+rm(IDS)
+
+## mirror the data train/test for the model, no eval set b/c small data
+ROWS = sample(1:25, 5, replace=F)
+dummy_dish$set = "train"
+dummy_dish$set[ROWS] = "test"
+rm(ROWS)
+
+## save the data for use
+write.table(dummy_dish, file="../data/dummy-dish.csv", sep=",", row.names=F)
+write.table(dummy_ing, file="../data/dummy-ing.csv", sep=",", row.names=F)
+
+
 ## connect to the database -- will clear it out for this project
 graph = startGraph("http://localhost:7474/db/data/",
                    username = "neo4j",
                    password = "password")
 clear(graph, input = FALSE)
-
-## what do we have
-# dim(train_dish)
-# dim(test_dish)
-# dim(train_ing)
-# dim(test_ing)
-# head(train_dish)
-# head(test_dish)
-
-## 
-
-
-## huh? -- how so many ingredients
-# length(unique(test_ing$ingredient))
-# length(unique(train_ing$ingredient))
-# ings = unique(c(test_ing$ingredient, train_ing$ingredient))
-# ings = sort(ings)
-# head(ings)
-# 
-# ## obviously there is more that needs to be done on the ingredients
-# ## amt/size, prep, ?
-# 
-# 
-# ## combine the datasets
-
 
