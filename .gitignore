@@ -1,4 +1,6 @@
-data/
+# data/
 .Rhistory
-.zip
-.json
+*.zip
+* .json
+data/sample_submission.csv
+*.Rdata
