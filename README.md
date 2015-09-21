@@ -31,7 +31,7 @@ This is from Kaggle website.
 
 I am still new to graphs and graph databases in general, but here is the very simple data model I am attempting to use:
 
-![image](figs/data-model.png)
+![image](figs/model.png)
 
 
 ## Populate Neo4j
