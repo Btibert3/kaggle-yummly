@@ -27,6 +27,13 @@ This is from Kaggle website.
 > 
 > We want to thank Yummly for providing this unique dataset. Kaggle is hosting this playground competition for fun and practice.
 
+## Data Model
+
+I am still new to graphs and graph databases in general, but here is the very simple data model I am attempting to use:
+
+![image](figs/data-model.png)
+
+
 ## Populate Neo4j
 
 1.  Make sure that `neo4j` is running  
