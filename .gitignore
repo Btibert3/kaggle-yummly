@@ -4,3 +4,6 @@
 * .json
 data/sample_submission.csv
 *.Rdata
+data/test.json
+data/train.json
+.ipynb_checkpoints
