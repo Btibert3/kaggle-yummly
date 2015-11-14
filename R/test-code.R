@@ -6,14 +6,13 @@
 options(stringsAsFactors=F)
 
 ## load the libraries
-library(snow)
+library(doMC)
 library(RNeo4j)
 library(dplyr)
 
 ## setup the parallel environment?
-cl = makeCluster(4)
-class(cl)
-cl
+## https://cran.r-project.org/web/packages/doMC/vignettes/gettingstartedMC.pdf
+registerDoMC(2)
 
 
 ## connect to the local neo database

@@ -59,7 +59,7 @@ LIMIT 25
 
 // jaccard similarity
 // http://www.lyonwj.com/twizzard-a-tweet-recommender-system-using-neo4j/
-MATCH (d1:Dish {set:'train'}), (d2:Dish {set:'test'}) 
+MATCH (d1:Dish {id:'29752'}), (d2:Dish {set:'train'}) 
 WHERE d1 <> d2
 MATCH (d1)<--(mutual)-->(d2) 
 WITH d1, d2, count(mutual) as intersect
@@ -68,8 +68,16 @@ WITH d1, d2, intersect, collect(DISTINCT ing1) as coll1
 MATCH (d2)<-[r2]-(ing2:Ingredient)
 WITH d1, d2, intersect, coll1, collect(DISTINCT ing2) as coll2
 WITH d1, d2, intersect, coll1, coll2, length(coll1 + filter(x IN coll2 WHERE NOT x IN coll1)) as union
-CREATE (d1)<-[:JACC_SIM {coef: (1.0*intersect/union)}]-(d2)
+// CREATE (d1)<-[:JACC_SIM {coef: (1.0*intersect/union)}]-(d2)
+RETURN d1.id, d2.id as sim_id, d2.cuisine as sim_pred, (1.0*intersect/union) as coef
+ORDER BY coef DESC
+LIMIT 1
 
+
+// The test subgraph with common training nodes and relationships
+MATCH (d1:Dish {set:'test'})<-[r1]-(ing:Ingredient)-[r2]->(d2:Dish {set:'train'})
+RETURN d1, d2, ing, r1, r2
+LIMIT 100
 
 
 
